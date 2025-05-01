@@ -183,7 +183,7 @@ class luna_hardware_interface():
         #Publisher
         self.encoder_pub = rospy.Publisher(ENCODER_TOPIC, encoders, queue_size=10)
         #How often we publish
-        self.rate = rospy.Rate(2) # 10hz TODO: Remove sleep for encoder publisher
+        self.rate = rospy.Rate(50) # 10hz TODO: Remove sleep for encoder publisher
         
         #Drive Subscriber
         rospy.Subscriber(CMD_VEL_TOPIC, Twist, self.drive_callback)
@@ -354,7 +354,7 @@ class luna_hardware_interface():
             rospy.loginfo(rospy.get_caller_id() + f"linearVel: {self.linearVel}\tangularVel: {self.angularVel}")
             '''
             self.encoder_pub.publish(msg)
-            #self.rate.sleep()
+            self.rate.sleep()
 
 if __name__ == '__main__':
     try:
